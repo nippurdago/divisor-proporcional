@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divisor Proporcional</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Para que el padding no aumente el ancho total */
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: #d9534f; /* Rojo bootstrap 'danger' */
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .results {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e9f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 4px;
+        }
+        .results h3 {
+            margin-top: 0;
+            color: #28a745; /* Verde bootstrap 'success' */
+        }
+        .results ul {
+            list-style: none;
+            padding: 0;
+        }
+        .results li {
+            background-color: #fff;
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            border: 1px solid #eee;
+            font-family: monospace; /* Mejor para números alineados */
+        }
+        small {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de División Proporcional</h1>
+
+    <form method="POST">
+        <div>
+            <label for="total_value">Valor Total a Dividir:</label>
+            <input type="text" id="total_value" name="total_value" required inputmode="decimal" value="{{ input_total }}">
+             <small>Introduce el número total (ej: 1000.50).</small>
+       </div>
+        <div>
+            <label for="proportions">Números de Proporción:</label>
+            <textarea id="proportions" name="proportions" required>{{ input_proportions }}</textarea>
+            <small>Introduce los números separados por comas, espacios o saltos de línea (ej: 38200, 38200, 25700, 25700).</small>
+        </div>
+        <button type="submit">Calcular Distribución</button>
+    </form>
+
+    {% if error %}
+        <div class="error">
+            <strong>Error:</strong> {{ error }}
+        </div>
+    {% endif %}
+
+    {% if results %}
+        <div class="results">
+            <h3>Resultados de la Distribución:</h3>
+            <ul>
+                {% for value in results %}
+                    <li>{{ value }}</li>
+                {% endfor %}
+            </ul>
+            {# Puedes añadir una suma de verificación si quieres, calculada en el backend #}
+            {# <strong>Suma de los resultados: {{ sum_results_display }}</strong> #}
+         </div>
+    {% endif %}
+
+</body>
+</html>
