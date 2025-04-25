@@ -144,5 +144,3 @@ def index():
                            input_total=input_total,
                            input_proportions=input_proportions)
 
-if __name__ == '__main__':
-    # debug=True es útil para desarrollo, ¡desactívalo en producción!
